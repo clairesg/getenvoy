@@ -33,7 +33,6 @@ ENV TINYGO_SDK_PATH=${GOMODCACHE}/${TINYGO_SDK_NAME}@${TINYGO_SDK_VERSION}
 
 RUN mkdir -p ${TINYGO_SDK_PATH} && git clone https://${TINYGO_SDK_NAME} -b ${TINYGO_SDK_VERSION} ${TINYGO_SDK_PATH}
 
-
 COPY ./entrypoint.sh /usr/local/getenvoy/extension/builder/entrypoint.sh
 COPY ./tinygo/commands.sh /usr/local/getenvoy/extension/builder/commands.sh
 ENTRYPOINT ["/usr/local/getenvoy/extension/builder/entrypoint.sh"]

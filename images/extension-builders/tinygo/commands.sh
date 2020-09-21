@@ -23,14 +23,15 @@
 #   Path relative to the workspace root to copy *.wasm file to.
 #########################################################################
 extension_build()  {
-	tinygo build -o "$1" -wasm-abi=generic -target wasm main.go
+	exec tinygo build -o "$1" -wasm-abi=generic -target wasm main.go
 }
 
 extension_test()  {
-	go test -tags=proxytest -v ./...
+	exec go test -tags=proxytest -v ./...
 }
 
 extension_clean()  {
-	rm main.wasm || true
-	rm -rf "${GOCACHE}" "${XDG_CACHE_HOME}" "${GOMODCACHE}" || true
+	rm /source/main.wasm || true
+	go clean -modcache
+	rm -rf "${GOCACHE}" "${XDG_CACHE_HOME}" || true
 }
