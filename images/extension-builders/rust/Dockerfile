@@ -24,6 +24,6 @@ RUN rustup target add wasm32-unknown-unknown
 ENV CARGO_HOME=
 
 COPY ./entrypoint.sh /usr/local/getenvoy/extension/builder/entrypoint.sh
-COPY ./commands.sh /usr/local/getenvoy/extension/builder/commands.sh
+COPY ./rust/commands.sh /usr/local/getenvoy/extension/builder/commands.sh
 ENTRYPOINT ["/usr/local/getenvoy/extension/builder/entrypoint.sh"]
 CMD ["--help"]

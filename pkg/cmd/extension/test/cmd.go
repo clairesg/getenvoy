@@ -82,6 +82,7 @@ Run unit tests on Envoy extension.`,
 			err = toolchain.Test(types.TestContext{
 				IO: cmdutil.StreamsOf(cmd),
 			})
+
 			if err != nil {
 				return errors.Wrapf(err, "failed to unit test Envoy extension using %q toolchain", opts.Toolchain.Name)
 			}
