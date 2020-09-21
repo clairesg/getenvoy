@@ -48,7 +48,8 @@ func (l Language) String() string {
 
 const (
 	// LanguageRust represens a Rust programming language.
-	LanguageRust Language = "rust"
+	LanguageRust   Language = "rust"
+	LanguageTinyGo Language = "tinygo"
 )
 
 // Descriptor represents an extension created by getenvoy toolkit.
