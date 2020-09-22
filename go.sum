@@ -653,6 +653,8 @@ github.com/tetratelabs/log v0.0.0-20190710134534-eb04d1e84fb8 h1:a7FN/XPymdzttMa
 github.com/tetratelabs/log v0.0.0-20190710134534-eb04d1e84fb8/go.mod h1:w+dEBsxcYEFg0I6whrgkMzjD8GBBQgmDq9hykB30pt8=
 github.com/tetratelabs/multierror v1.1.0 h1:cKmV/Pbf42K5wp8glxa2YIausbxIraPN8fzru9Pn1Cg=
 github.com/tetratelabs/multierror v1.1.0/go.mod h1:kH3SzI/z+FwEbV9bxQDx4GiIgE2djuyb8wiB2DaUBnY=
+github.com/tetratelabs/proxy-wasm-go-sdk v0.0.2 h1:nJVDdX6v/Mn0IbiogBv4cJvil4mHmBubML+3KZIWe/A=
+github.com/tetratelabs/proxy-wasm-go-sdk v0.0.2/go.mod h1:oriMCq3KvyEkgWVKr5B9DauvzpQ4Qy5eb32hxPa83Dw=
 github.com/tidwall/pretty v1.0.0/go.mod h1:XNkn88O1ChpSDQmQeStsy+sBenx6DDtFZJxhVysOjyk=
 github.com/tinylib/msgp v1.0.2/go.mod h1:+d+yLhGm8mzTaHzB+wgMYrodPfmZrzkirds8fDWklFE=
 github.com/tmc/grpc-websocket-proxy v0.0.0-20170815181823-89b8d40f7ca8/go.mod h1:ncp9v5uamzpCO7NfCPTXjqaC+bZgJeR0sMTm6dMHP7U=

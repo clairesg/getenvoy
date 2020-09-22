@@ -35,7 +35,7 @@ var (
 		},
 		extension.LanguageTinyGo.String(): {
 			{Value: extension.EnvoyHTTPFilter.String(), DisplayText: "HTTP Filter"},
-			// {Value: extension.EnvoyNetworkFilter.String(), DisplayText: "Network Filter"},
+			{Value: extension.EnvoyNetworkFilter.String(), DisplayText: "Network Filter"},
 		},
 	}
 	// SupportedLanguages ... programming languages supported by the `init` command.
