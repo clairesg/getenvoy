@@ -54,6 +54,7 @@ var _ = BeforeEach(func() {
 })
 
 var _ = AfterEach(func() {
+	GetEnvoy("extension clean")
 	if tempDir != "" {
 		Expect(os.RemoveAll(tempDir)).To(Succeed())
 	}

@@ -103,8 +103,8 @@ var _ = Describe("getenvoy extension run", func() {
 			By("running `extension init` command")
 			_, _, err := GetEnvoy("extension init").
 				Arg(outputDir).
-				Arg("--category").Arg(given.Category.String()).
-				Arg("--language").Arg(given.Language.String()).
+				Arg("--category").Arg(given.Category).
+				Arg("--language").Arg(given.Language).
 				Arg("--name").Arg(extensionName).
 				Exec()
 			Expect(err).NotTo(HaveOccurred())

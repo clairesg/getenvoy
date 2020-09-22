@@ -91,7 +91,7 @@ func newParams() *params {
 			if value == "" {
 				return errors.New("programming language cannot be empty")
 			}
-			if !supportedLanguages.Contains(value) {
+			if !SupportedLanguages.Contains(value) {
 				return errors.Errorf("%q is not a supported programming language", value)
 			}
 			return nil
@@ -102,14 +102,13 @@ func newParams() *params {
 			Title: "Category",
 			Validator: func(value string) error {
 				if err := language.Validate(); err != nil {
-					// fmt.Println(err)
 					return err
 				}
 
 				if value == "" {
 					return errors.New("extension category cannot be empty")
 				}
-				if !supportedCategories[language.Value].Contains(value) {
+				if !SupportedCategories[language.Value].Contains(value) {
 					return errors.Errorf("%q is not a supported extension category", value)
 				}
 				return nil

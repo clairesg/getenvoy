@@ -27,7 +27,7 @@ import (
 
 var (
 	// extension categories supported by the `init` command.
-	supportedCategories = map[string]options{
+	SupportedCategories = map[string]options{
 		extension.LanguageRust.String(): {
 			{Value: extension.EnvoyHTTPFilter.String(), DisplayText: "HTTP Filter"},
 			{Value: extension.EnvoyNetworkFilter.String(), DisplayText: "Network Filter"},
@@ -35,11 +35,11 @@ var (
 		},
 		extension.LanguageTinyGo.String(): {
 			{Value: extension.EnvoyHTTPFilter.String(), DisplayText: "HTTP Filter"},
-			{Value: extension.EnvoyNetworkFilter.String(), DisplayText: "Network Filter"},
+			// {Value: extension.EnvoyNetworkFilter.String(), DisplayText: "Network Filter"},
 		},
 	}
 	// programming languages supported by the `init` command.
-	supportedLanguages = options{
+	SupportedLanguages = options{
 		{Value: extension.LanguageRust.String(), DisplayText: "Rust"},
 		{Value: extension.LanguageTinyGo.String(), DisplayText: "TinyGo"},
 	}
@@ -127,10 +127,10 @@ Scaffold a new Envoy extension in a language of your choice.`,
 	}
 	cmd.PersistentFlags().StringVar(&params.Language.Value,
 		"language", "",
-		"Choose programming language. "+hintOneOf(supportedLanguages.Values()...))
+		"Choose programming language. "+hintOneOf(SupportedLanguages.Values()...))
 	cmd.PersistentFlags().StringVar(&params.Category.Value,
 		"category", "",
-		"Choose extension category. "+hintOneOf(supportedCategories[params.Language.Value].Values()...))
+		"Choose extension category. "+hintOneOf(SupportedCategories[params.Language.Value].Values()...))
 	cmd.PersistentFlags().StringVar(&params.Name.Value,
 		"name", "", `Choose extension name, e.g. "mycompany.filters.http.custom_metrics"`)
 	return cmd

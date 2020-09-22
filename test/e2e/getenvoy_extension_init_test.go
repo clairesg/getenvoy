@@ -53,8 +53,8 @@ var _ = Describe("getenvoy extension init", func() {
 		workspace, err := workspaces.GetWorkspaceAt(outputDir)
 		Expect(err).NotTo(HaveOccurred())
 		Expect(workspace.GetExtensionDescriptor().Name).To(Equal(extensionName))
-		Expect(workspace.GetExtensionDescriptor().Category).To(Equal(given.Category))
-		Expect(workspace.GetExtensionDescriptor().Language).To(Equal(given.Language))
+		Expect(workspace.GetExtensionDescriptor().Category.String()).To(Equal(given.Category))
+		Expect(workspace.GetExtensionDescriptor().Language.String()).To(Equal(given.Language))
 	}
 
 	DescribeTable("should create extension in a new directory",
@@ -65,8 +65,8 @@ var _ = Describe("getenvoy extension init", func() {
 			By("running `extension init` command")
 			stdout, stderr, err := GetEnvoy("extension init").
 				Arg(outputDir).
-				Arg("--category").Arg(given.Category.String()).
-				Arg("--language").Arg(given.Language.String()).
+				Arg("--category").Arg(given.Category).
+				Arg("--language").Arg(given.Language).
 				Arg("--name").Arg(extensionName).
 				Exec()
 			Expect(err).NotTo(HaveOccurred())
@@ -91,8 +91,8 @@ var _ = Describe("getenvoy extension init", func() {
 
 			By("running `extension init` command")
 			stdout, stderr, err := GetEnvoy("extension init").
-				Arg("--category").Arg(given.Category.String()).
-				Arg("--language").Arg(given.Language.String()).
+				Arg("--category").Arg(given.Category).
+				Arg("--language").Arg(given.Language).
 				Arg("--name").Arg(extensionName).
 				Exec()
 			Expect(err).NotTo(HaveOccurred())

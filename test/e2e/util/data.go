@@ -17,14 +17,13 @@ package util
 import (
 	"fmt"
 
-	"github.com/tetratelabs/getenvoy/pkg/extension/workspace/config/extension"
+	cmdinit "github.com/tetratelabs/getenvoy/pkg/cmd/extension/init"
 )
 
 // CategoryLanguageTuple represents a combination of extension category and
 // programming language.
 type CategoryLanguageTuple struct {
-	extension.Category
-	extension.Language
+	Category, Language string
 }
 
 func (t CategoryLanguageTuple) String() string {
@@ -35,9 +34,9 @@ func (t CategoryLanguageTuple) String() string {
 // extension category with a supported programming language.
 func GetCategoryLanguageCombinations() []CategoryLanguageTuple {
 	tuples := make([]CategoryLanguageTuple, 0)
-	for _, category := range extension.Categories {
-		for _, language := range extension.Languages {
-			tuples = append(tuples, CategoryLanguageTuple{category, language})
+	for _, lang := range cmdinit.SupportedLanguages {
+		for _, category := range cmdinit.SupportedCategories[lang.Value] {
+			tuples = append(tuples, CategoryLanguageTuple{category.Value, lang.Value})
 		}
 	}
 	return tuples

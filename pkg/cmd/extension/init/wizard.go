@@ -59,10 +59,10 @@ type promptOpts struct {
 // Fill runs the interactive UI to help a user to fill in parameters.
 func (w *wizard) Fill(params *params) error {
 	w.out.Println(uiutil.Underline("What kind of extension would you like to create?"))
-	if err := w.choose(params.Language, supportedLanguages, w.newLanguageSelector); err != nil {
+	if err := w.choose(params.Language, SupportedLanguages, w.newLanguageSelector); err != nil {
 		return err
 	}
-	if err := w.choose(params.Category, supportedCategories[params.Language.Value], w.newCategorySelector); err != nil {
+	if err := w.choose(params.Category, SupportedCategories[params.Language.Value], w.newCategorySelector); err != nil {
 		return err
 	}
 	if err := w.prompt(params.OutputDir, w.newOutputDirPrompt, promptOpts{}); err != nil {
