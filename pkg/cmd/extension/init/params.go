@@ -43,10 +43,10 @@ func (p *param) IsValid() bool {
 
 // params represents all parameters to be filled in by a user.
 type params struct {
-	Category  param
-	Language  param
-	OutputDir param
-	Name      param
+	Category  *param
+	Language  *param
+	OutputDir *param
+	Name      *param
 }
 
 func (o *params) Validate() error {
@@ -85,32 +85,38 @@ func (o *params) DefaultName() {
 
 //nolint:gocyclo
 func newParams() *params {
+	language := &param{
+		Title: "Language",
+		Validator: func(value string) error {
+			if value == "" {
+				return errors.New("programming language cannot be empty")
+			}
+			if !supportedLanguages.Contains(value) {
+				return errors.Errorf("%q is not a supported programming language", value)
+			}
+			return nil
+		},
+	}
 	return &params{
-		Category: param{
+		Category: &param{
 			Title: "Category",
 			Validator: func(value string) error {
+				if err := language.Validate(); err != nil {
+					// fmt.Println(err)
+					return err
+				}
+
 				if value == "" {
 					return errors.New("extension category cannot be empty")
 				}
-				if !supportedCategories.Contains(value) {
+				if !supportedCategories[language.Value].Contains(value) {
 					return errors.Errorf("%q is not a supported extension category", value)
 				}
 				return nil
 			},
 		},
-		Language: param{
-			Title: "Language",
-			Validator: func(value string) error {
-				if value == "" {
-					return errors.New("programming language cannot be empty")
-				}
-				if !supportedLanguages.Contains(value) {
-					return errors.Errorf("%q is not a supported programming language", value)
-				}
-				return nil
-			},
-		},
-		OutputDir: param{
+		Language: language,
+		OutputDir: &param{
 			Title: "Output directory",
 			Validator: func(value string) error {
 				outputDir, err := scaffold.NormalizeOutputPath(value)
@@ -137,7 +143,7 @@ func newParams() *params {
 				return nil
 			},
 		},
-		Name: param{
+		Name: &param{
 			Title: "Extension name",
 			Validator: func(value string) error {
 				if value == "" {

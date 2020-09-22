@@ -75,14 +75,14 @@ var _ = Describe("getenvoy extension init", func() {
 				Expect(stderr.String()).To(Equal(given.expectedStdErr))
 			},
 			Entry("extension category is missing", give(testCase{
-				args: []string{},
+				args: []string{"--language", "rust"},
 				expectedStdErr: `Error: extension category cannot be empty
 
 Run 'getenvoy extension init --help' for usage.
 `,
 			})),
 			Entry("extension category is not valid", give(testCase{
-				args: []string{"--category", "invalid.category"},
+				args: []string{"--language", "rust", "--category", "invalid.category"},
 				expectedStdErr: `Error: "invalid.category" is not a supported extension category
 
 Run 'getenvoy extension init --help' for usage.

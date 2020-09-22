@@ -27,10 +27,16 @@ import (
 
 var (
 	// extension categories supported by the `init` command.
-	supportedCategories = options{
-		{Value: extension.EnvoyHTTPFilter.String(), DisplayText: "HTTP Filter"},
-		{Value: extension.EnvoyNetworkFilter.String(), DisplayText: "Network Filter"},
-		{Value: extension.EnvoyAccessLogger.String(), DisplayText: "Access Logger"},
+	supportedCategories = map[string]options{
+		extension.LanguageRust.String(): {
+			{Value: extension.EnvoyHTTPFilter.String(), DisplayText: "HTTP Filter"},
+			{Value: extension.EnvoyNetworkFilter.String(), DisplayText: "Network Filter"},
+			{Value: extension.EnvoyAccessLogger.String(), DisplayText: "Access Logger"},
+		},
+		extension.LanguageTinyGo.String(): {
+			{Value: extension.EnvoyHTTPFilter.String(), DisplayText: "HTTP Filter"},
+			{Value: extension.EnvoyNetworkFilter.String(), DisplayText: "Network Filter"},
+		},
 	}
 	// programming languages supported by the `init` command.
 	supportedLanguages = options{
@@ -119,9 +125,14 @@ Scaffold a new Envoy extension in a language of your choice.`,
 			return scaffold.Scaffold(opts)
 		},
 	}
-	cmd.PersistentFlags().StringVar(&params.Category.Value, "category", "", "Choose extension category. "+hintOneOf(supportedCategories.Values()...))
-	cmd.PersistentFlags().StringVar(&params.Language.Value, "language", "", "Choose programming language. "+hintOneOf(supportedLanguages.Values()...))
-	cmd.PersistentFlags().StringVar(&params.Name.Value, "name", "", `Choose extension name, e.g. "mycompany.filters.http.custom_metrics"`)
+	cmd.PersistentFlags().StringVar(&params.Language.Value,
+		"language", "",
+		"Choose programming language. "+hintOneOf(supportedLanguages.Values()...))
+	cmd.PersistentFlags().StringVar(&params.Category.Value,
+		"category", "",
+		"Choose extension category. "+hintOneOf(supportedCategories[params.Language.Value].Values()...))
+	cmd.PersistentFlags().StringVar(&params.Name.Value,
+		"name", "", `Choose extension name, e.g. "mycompany.filters.http.custom_metrics"`)
 	return cmd
 }
 

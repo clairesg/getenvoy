@@ -75,8 +75,8 @@ var _ = Describe("interactive mode", func() {
 					return testCase{
 						noColors: true,
 						expected: fmt.Sprintf(`What kind of extension would you like to create?
-* Category HTTP Filter
 * Language Rust
+* Category HTTP Filter
 * Output directory %s
 * Extension name mycompany.filters.http.custom_metrics
 Great! Let me help you with that!
@@ -88,8 +88,8 @@ Great! Let me help you with that!
 					return testCase{
 						noColors: false,
 						expected: "\x1b[4mWhat kind of extension would you like to create?\x1b[0m\n" +
-							"\x1b[32m✔\x1b[0m \x1b[3mCategory\x1b[0m \x1b[2mHTTP Filter\x1b[0m\n" +
 							"\x1b[32m✔\x1b[0m \x1b[3mLanguage\x1b[0m \x1b[2mRust\x1b[0m\n" +
+							"\x1b[32m✔\x1b[0m \x1b[3mCategory\x1b[0m \x1b[2mHTTP Filter\x1b[0m\n" +
 							fmt.Sprintf("\x1b[32m✔\x1b[0m \x1b[3mOutput directory\x1b[0m \x1b[2m%s\x1b[0m\n", tmpDir) +
 							"\x1b[32m✔\x1b[0m \x1b[3mExtension name\x1b[0m \x1b[2mmycompany.filters.http.custom_metrics\x1b[0m\n" +
 							"Great! Let me help you with that!\n" +
