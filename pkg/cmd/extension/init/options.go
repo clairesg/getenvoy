@@ -21,7 +21,7 @@ type option struct {
 }
 
 // options represents an exhaustive list of valid configuration values.
-type options []option
+type options []*option
 
 func (o options) Contains(value string) bool {
 	return o.IndexOf(value) >= 0
@@ -29,7 +29,7 @@ func (o options) Contains(value string) bool {
 
 func (o options) ByValue(value string) *option {
 	if i := o.IndexOf(value); i >= 0 {
-		return &o[i]
+		return o[i]
 	}
 	return nil
 }

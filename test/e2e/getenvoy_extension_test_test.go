@@ -67,6 +67,7 @@ var _ = Describe("getenvoy extension test", func() {
 			// apparently, use of `-t` option in `docker run` causes stderr to be incorporated into stdout
 			Expect(stdout).NotTo(BeEmpty())
 			Expect(stderr).To(BeEmpty())
+			cleanUpExtensionDir(outputDir)
 		},
 		testCases()...,
 	)

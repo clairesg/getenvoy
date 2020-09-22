@@ -120,6 +120,7 @@ default
 
 Use "getenvoy extension examples add --help" for more information on how to add one.
 `))
+			cleanUpExtensionDir(outputDir)
 		},
 		testCases()...,
 	)

@@ -78,6 +78,7 @@ var _ = Describe("getenvoy extension build", func() {
 			toolchain, err := toolchains.LoadToolchain(toolchains.Default, workspace)
 			Expect(err).NotTo(HaveOccurred())
 			Expect(toolchain).NotTo(BeNil())
+			cleanUpExtensionDir(outputDir)
 		},
 		testCases()...,
 	)

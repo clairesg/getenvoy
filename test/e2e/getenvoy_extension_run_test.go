@@ -189,6 +189,7 @@ var _ = Describe("getenvoy extension run", func() {
 			})
 			Expect(err).NotTo(HaveOccurred())
 			Expect(dumpFiles).To(ContainElements("config_dump.json", "stats.json"))
+			cleanUpExtensionDir(outputDir)
 		},
 		testCases()...,
 	)

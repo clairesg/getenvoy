@@ -102,6 +102,7 @@ var _ = Describe("getenvoy extension init", func() {
 
 			By("verifying output directory")
 			VerifyOutputDir(given, outputDir)
+			cleanUpExtensionDir(outputDir)
 		},
 		testCases()...,
 	)
