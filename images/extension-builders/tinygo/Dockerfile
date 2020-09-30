@@ -18,20 +18,14 @@
 
 FROM golang:1.15
 
-ENV TINYGO_VERSION=0.15.0
-
-RUN wget https://github.com/tinygo-org/tinygo/releases/download/v${TINYGO_VERSION}/tinygo_${TINYGO_VERSION}_amd64.deb
-RUN dpkg -i tinygo_${TINYGO_VERSION}_amd64.deb && rm tinygo_${TINYGO_VERSION}_amd64.deb
+# TODO: use 1.6.0 release package after the WASI supported is released
+#   this corresponds to https://github.com/tinygo-org/tinygo/commit/f50ad3585d084b17f7754f4b3cb0d42661fee036
+RUN wget https://19227-136505169-gh.circle-artifacts.com/0/tmp/tinygo_amd64.deb
+RUN dpkg -i tinygo_amd64.deb && rm tinygo_amd64.deb
 
 ENV GOCACHE=/source/.gocache
 ENV GOMODCACHE=/source/.gomodcache
 ENV XDG_CACHE_HOME=/source/.cache
-
-ENV TINYGO_SDK_NAME=github.com/tetratelabs/proxy-wasm-go-sdk
-ENV TINYGO_SDK_VERSION=v0.0.2
-ENV TINYGO_SDK_PATH=${GOMODCACHE}/${TINYGO_SDK_NAME}@${TINYGO_SDK_VERSION}
-
-RUN mkdir -p ${TINYGO_SDK_PATH} && git clone https://${TINYGO_SDK_NAME} -b ${TINYGO_SDK_VERSION} ${TINYGO_SDK_PATH}
 
 COPY ./entrypoint.sh /usr/local/getenvoy/extension/builder/entrypoint.sh
 COPY ./tinygo/commands.sh /usr/local/getenvoy/extension/builder/commands.sh

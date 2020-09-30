@@ -14,14 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#########################################################################
-# Build Wasm extension and copy *.wasm file to a given location.
-# Globals:
-#   CARGO_TARGET_DIR
-#   GETENVOY_WORKSPACE_DIR
-# Arguments:
-#   Path relative to the workspace root to copy *.wasm file to.
-#########################################################################
 extension_build()  {
 	exec tinygo build -o "$1" -wasm-abi=generic -target wasm main.go
 }
