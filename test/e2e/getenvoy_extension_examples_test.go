@@ -43,6 +43,7 @@ var _ = Describe("getenvoy extension examples", func() {
 		func(given testCase) {
 			By("choosing the output directory")
 			outputDir := filepath.Join(tempDir, "new")
+			defer CleanUpExtensionDir(outputDir)
 
 			By("running `extension init` command")
 			_, _, err := GetEnvoy("extension init").
@@ -120,7 +121,6 @@ default
 
 Use "getenvoy extension examples add --help" for more information on how to add one.
 `))
-			cleanUpExtensionDir(outputDir)
 		},
 		testCases()...,
 	)

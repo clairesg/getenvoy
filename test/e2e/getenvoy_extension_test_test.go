@@ -43,6 +43,7 @@ var _ = Describe("getenvoy extension test", func() {
 		func(given testCase) {
 			By("choosing the output directory")
 			outputDir := filepath.Join(tempDir, "new")
+			defer CleanUpExtensionDir(outputDir)
 
 			By("running `extension init` command")
 			_, _, err := GetEnvoy("extension init").
@@ -67,7 +68,6 @@ var _ = Describe("getenvoy extension test", func() {
 			// apparently, use of `-t` option in `docker run` causes stderr to be incorporated into stdout
 			Expect(stdout).NotTo(BeEmpty())
 			Expect(stderr).To(BeEmpty())
-			cleanUpExtensionDir(outputDir)
 		},
 		testCases()...,
 	)

@@ -84,6 +84,7 @@ var _ = Describe("getenvoy extension init", func() {
 		func(given testCase) {
 			By("choosing the output directory")
 			outputDir := tempDir
+			defer CleanUpExtensionDir(outputDir)
 
 			By("changing to the output directory")
 			err := os.Chdir(outputDir)
@@ -102,7 +103,6 @@ var _ = Describe("getenvoy extension init", func() {
 
 			By("verifying output directory")
 			VerifyOutputDir(given, outputDir)
-			cleanUpExtensionDir(outputDir)
 		},
 		testCases()...,
 	)
