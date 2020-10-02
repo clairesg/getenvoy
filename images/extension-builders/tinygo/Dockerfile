@@ -20,7 +20,7 @@ FROM golang:1.15
 
 # TODO: use 1.6.0 release package after the WASI supported is released
 #   this corresponds to https://github.com/tinygo-org/tinygo/commit/f50ad3585d084b17f7754f4b3cb0d42661fee036
-RUN wget https://19227-136505169-gh.circle-artifacts.com/0/tmp/tinygo_amd64.deb
+RUN wget https://storage.googleapis.com/getenvoy-package/tinygo-nightly-packages/tinygo_amd64.deb
 RUN dpkg -i tinygo_amd64.deb && rm tinygo_amd64.deb
 
 ENV GOCACHE=/source/.gocache
