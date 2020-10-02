@@ -26,7 +26,7 @@ import (
 )
 
 var (
-	// SupportedCategories ... extension categories supported by the `init` command for each language.
+	// SupportedCategories are extension categories supported by the `init` command for each language.
 	SupportedCategories = map[string]options{
 		extension.LanguageRust.String(): {
 			{Value: extension.EnvoyHTTPFilter.String(), DisplayText: "HTTP Filter"},
@@ -38,7 +38,7 @@ var (
 			{Value: extension.EnvoyNetworkFilter.String(), DisplayText: "Network Filter"},
 		},
 	}
-	// SupportedLanguages ... programming languages supported by the `init` command.
+	// SupportedLanguages are programming languages supported by the `init` command.
 	SupportedLanguages = options{
 		{Value: extension.LanguageRust.String(), DisplayText: "Rust"},
 		{Value: extension.LanguageTinyGo.String(), DisplayText: "TinyGo"},
