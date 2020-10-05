@@ -6,36 +6,45 @@ import (
 )
 
 var (
-	connectionCounterName = "proxy_wasm_go.connection_counter"
+	connectionCounterName = "my_network_filter.connection_counter"
 	counter               proxywasm.MetricCounter
 )
 
-type context struct{ proxywasm.DefaultContext }
-
 func main() {
-	proxywasm.SetNewRootContext(func(contextID uint32) proxywasm.RootContext { return context{} })
-	proxywasm.SetNewStreamContext(func(contextID uint32) proxywasm.StreamContext { return context{} })
+	proxywasm.SetNewRootContext(newRootContext)
+	proxywasm.SetNewStreamContext(newStreamContext)
 }
 
-func (ctx context) OnVMStart(int) bool {
-	var err error
-	counter, err = proxywasm.DefineCounterMetric(connectionCounterName)
-	if err != nil {
-		proxywasm.LogCritical("failed to initialize connection counter: ", err.Error())
-	}
+type rootContext struct {
+	proxywasm.DefaultRootContext
+	contextID uint32
+}
+
+func newRootContext(rootContextID uint32) proxywasm.RootContext {
+	return &rootContext{contextID: rootContextID}
+}
+
+func (ctx *rootContext) OnVMStart(int) bool {
+	counter = proxywasm.DefineCounterMetric(connectionCounterName)
 	return true
 }
 
-func (ctx context) OnNewConnection() types.Action {
+type streamContext struct {
+	// you must embed the default context so that you need not to reimplement all the methods by yourself
+	proxywasm.DefaultStreamContext
+	rootContextID, contextID uint32
+}
+
+func newStreamContext(rootContextID, contextID uint32) proxywasm.StreamContext {
+	return &streamContext{contextID: contextID, rootContextID: rootContextID}
+}
+
+func (ctx *streamContext) OnNewConnection() types.Action {
 	proxywasm.LogInfo("new connection!")
 	return types.ActionContinue
 }
 
-func (ctx context) OnDone() bool {
-	err := counter.Increment(1)
-	if err != nil {
-		proxywasm.LogCritical("failed to increment connection counter: ", err.Error())
-	}
+func (ctx *streamContext) OnStreamDone() {
+	counter.Increment(1)
 	proxywasm.LogInfo("connection complete!")
-	return true
 }
