@@ -30,7 +30,7 @@ func (ctx *rootContext) OnVMStart(vmConfigurationSize int) bool {
 }
 
 type streamContext struct {
-	// you must embed the default context so that you need not to reimplement all the methods by yourself
+	// we must embed the default context so that you need not to reimplement all the methods by yourself
 	proxywasm.DefaultStreamContext
 	rootContextID, contextID uint32
 }
