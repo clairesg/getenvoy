@@ -24,7 +24,7 @@ func newRootContext(rootContextID uint32) proxywasm.RootContext {
 	return &rootContext{contextID: rootContextID}
 }
 
-func (ctx *rootContext) OnVMStart(int) bool {
+func (ctx *rootContext) OnVMStart(vmConfigurationSize int) bool {
 	counter = proxywasm.DefineCounterMetric(connectionCounterName)
 	return true
 }

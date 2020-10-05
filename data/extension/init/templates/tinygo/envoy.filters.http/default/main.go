@@ -40,7 +40,7 @@ func newHttpContext(rootContextID, contextID uint32) proxywasm.HttpContext {
 	return &httpContext{contextID: contextID, rootContextID: rootContextID}
 }
 
-func (ctx *httpContext) OnHttpRequestHeaders(int, bool) types.Action {
+func (ctx *httpContext) OnHttpRequestHeaders(numHeaders int, endOfStream bool) types.Action {
 	hs, err := proxywasm.GetHttpRequestHeaders()
 	if err != nil {
 		proxywasm.LogCriticalf("failed to get request headers: %v", err)
@@ -54,7 +54,7 @@ func (ctx *httpContext) OnHttpRequestHeaders(int, bool) types.Action {
 	return types.ActionContinue
 }
 
-func (ctx *httpContext) OnHttpResponseHeaders(int, bool) types.Action {
+func (ctx *httpContext) OnHttpResponseHeaders(numHeaders int, endOfStream bool) types.Action {
 	if err := proxywasm.SetHttpResponseHeader("additional", "header"); err != nil {
 		proxywasm.LogCriticalf("failed to add header: %v", err)
 	}
